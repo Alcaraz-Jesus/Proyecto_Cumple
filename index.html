@@ -4,125 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
     <style>
-        /* Estilos Generales */
+        /* --- ESTILOS GENERALES --- */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fce4ec; /* Rosa pastel suave */
-            color: #4a4a4a;
+            /* Fondo color crema suave */
+            background-color: #fdf6e3;
+            /* Fuente principal tipo escritura a mano */
+            font-family: 'Patrick Hand', cursive;
+            color: #5c4b3e; /* Color marrón suave para el texto */
             margin: 0;
-            padding: 0;
+            padding: 20px;
             text-align: center;
+            /* Textura sutil de papel arrugado usando gradientes */
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 2px, transparent 2px, transparent 5px);
         }
 
-        /* Encabezado */
+        /* --- ENCABEZADO --- */
         header {
-            background: linear-gradient(135deg, #f06292, #ec407a);
-            color: white;
-            padding: 60px 20px;
-            margin-bottom: 30px;
-            border-bottom-left-radius: 50% 20%;
-            border-bottom-right-radius: 50% 20%;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            /* Borde decorativo tipo "pegatina" */
+            border: 3px dashed #d4a5a5;
+            background: #fffaf0;
+            border-radius: 15px;
+            box-shadow: 5px 5px 0px rgba(212, 165, 165, 0.4);
+            transform: rotate(-1deg); /* Pequeña inclinación para que se vea manual */
         }
 
-        h1 { font-size: 2.5em; margin: 0; }
-        p.subtitle { font-size: 1.2em; opacity: 0.9; }
+        h1 {
+            font-family: 'Dancing Script', cursive; /* Fuente más cursiva para el título */
+            font-size: 3.5em;
+            color: #d4a5a5; /* Rosa viejo */
+            margin: 0;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
 
-        /* Galería de Fotos */
+        p.subtitle { font-size: 1.4em; margin-top: 10px; opacity: 0.8; }
+
+        /* --- GALERÍA TIPO POLAROID --- */
         .gallery-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            /* Distribución automática de fotos */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px; /* Espacio entre fotos */
         }
 
         .photo-card {
             background: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            /* Padding extra abajo para el estilo Polaroid */
+            padding: 15px 15px 50px 15px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+            position: relative; /* Necesario para el efecto de cinta adhesiva */
             transition: transform 0.3s ease;
         }
 
-        .photo-card:hover { transform: translateY(-5px); }
-        
-        img {
-            width: 100%;
-            border-radius: 5px;
-            height: auto;
+        /* Efecto de "Cinta Adhesiva" (Washi Tape) en la parte superior de cada foto */
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 35%;
+            width: 30%;
+            height: 35px;
+            background-color: rgba(255, 228, 196, 0.8); /* Color beige semitransparente */
+            border: 1px dotted #ccc;
+            transform: rotate(-5deg);
+            z-index: 1;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
-        /* Sección de Mensajes */
-        .messages {
-            background-color: white;
-            margin: 40px auto;
-            padding: 30px;
-            max-width: 600px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        /* Inclinaciones aleatorias para que parezcan pegadas a mano */
+        .photo-card:nth-child(odd) { transform: rotate(2deg); }
+        .photo-card:nth-child(even) { transform: rotate(-2deg); }
+        .photo-card:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10;}
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            filter: sepia(20%); /* Un toque sutil de sepia para nostalgia */
+        }
+
+        .photo-card p { margin-top: 15px; font-weight: bold; color: #888; }
+
+        /* --- SECCIÓN DE MENSAJES (Estilo Hoja de Libreta) --- */
+        .messages-container {
+            max-width: 700px;
+            margin: 60px auto;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            /* Fondo de líneas de cuaderno */
+            background-image: repeating-linear-gradient(white 0px, white 24px, #cce0ff 25px);
+            position: relative;
+            border-left: 5px solid #d4a5a5; /* Margen izquierdo rosado */
+        }
+
+        /* Efecto de "Chincheta" o pin en la nota */
+        .messages-container::after {
+            content: '📌';
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 2em;
         }
 
         .friend-note {
-            font-style: italic;
-            border-left: 4px solid #f06292;
-            padding-left: 15px;
-            margin-bottom: 20px;
-            text-align: left;
+            margin-bottom: 30px;
+            padding-left: 20px;
         }
+        .friend-note p { font-size: 1.3em; line-height: 1.6; margin-bottom: 5px; }
+        .friend-note strong { color: #d4a5a5; font-size: 1.1em; }
 
-        /* Botón de Música (Spotify) */
+        /* --- BOTÓN DE MÚSICA --- */
         .music-btn {
             display: inline-block;
             margin: 30px 0;
-            padding: 15px 30px;
-            background-color: #1DB954; /* Verde Spotify */
+            padding: 15px 40px;
+            background-color: #d4a5a5; /* Rosa viejo */
             color: white;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
+            border-radius: 30px 10px 30px 10px; /* Bordes irregulares */
+            font-size: 1.2em;
+            border: 2px dashed white;
+            box-shadow: 3px 3px 0px #b38b8b;
+            transition: all 0.2s ease;
         }
+        .music-btn:hover { transform: translateY(-3px); box-shadow: 5px 5px 0px #b38b8b; }
+
+        footer { margin-top: 50px; font-size: 0.9em; opacity: 0.7; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>¡Feliz Cumpleaños, [Nombre]! 🎂</h1>
-        <p class="subtitle">Un pequeño regalo de todos nosotros para ti.</p>
+        <h1>¡Feliz Cumpleaños, Amiga! 🎂</h1>
+        <p class="subtitle">Un pequeño "Junk Journal" digital con nuestros recuerdos.</p>
     </header>
 
     <div class="gallery-container">
         <div class="photo-card">
-            <img src="foto1.jpg" alt="Recuerdo 1">
-            <p>Verano 2024</p>
-        </div>
-        <div class="photo-card">
-            <img src="foto2.jpg" alt="Recuerdo 2">
-            <p>La graduación</p>
-        </div>
+            <img src="foto1.jpg" alt="Recuerdo">
+            <p>Añade una fecha o frase aquí</p>
         </div>
 
-    <div class="messages">
-        <h2>Lo que dicen tus amigos...</h2>
+        <div class="photo-card">
+            <img src="foto2.jpg" alt="Recuerdo">
+            <p>Otro recuerdo bonito</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="foto3.jpg" alt="Recuerdo">
+            <p>Descripción de la foto 3</p>
+        </div>
+        
+        </div>
+
+    <div class="messages-container">
+        <h2>💌 Notas de los amigos...</h2>
         
         <div class="friend-note">
-            <p>"¡Eres la mejor amiga del mundo! Que cumplas muchos más."</p>
-            <strong>- Tu Amigo 1</strong>
+            <p>"¡Aquí va el mensaje de felicitación! Que este nuevo año esté lleno de cosas increíbles."</p>
+            <strong>- Nombre del amigo</strong>
         </div>
 
         <div class="friend-note">
-            <p>"Gracias por tantas risas. ¡A celebrar!"</p>
-            <strong>- Tu Amigo 2</strong>
+            <p>"Gracias por ser como eres. ¡Vamos a celebrar en grande!"</p>
+            <strong>- Nombre del amigo</strong>
         </div>
-    </div>
+        
+        </div>
 
-    <a href="LINK_DE_PLAYLIST_DE_SPOTIFY" class="music-btn" target="_blank">
-        🎵 Escucha nuestra Playlist
+    <a href="LINK_DE_TU_PLAYLIST_AQUI" class="music-btn" target="_blank">
+        🎵 Nuestra Playlist
     </a>
 
     <footer>
-        <p>Hecho con ❤️ para ti.</p>
+        <p>Hecho con mucho cariño para ti. ❤️</p>
         <br>
     </footer>
 
