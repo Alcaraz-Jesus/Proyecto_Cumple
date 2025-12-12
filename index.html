@@ -17,15 +17,15 @@
             text-align: center;
             background-image: radial-gradient(#2a302a 1px, transparent 1px);
             background-size: 20px 20px;
-            overflow: hidden; /* Se desbloquea con JS al abrir el regalo */
-            position: relative; /* Necesario para los stickers */
+            overflow: hidden; 
+            position: relative;
         }
 
-        /* --- STICKERS DECORATIVOS (NUEVO) --- */
+        /* --- STICKERS DECORATIVOS --- */
         .sticker {
-            position: absolute; /* Se mueven con el scroll */
-            pointer-events: none; /* No estorban al clic */
-            z-index: 1; /* Detrás del contenido principal o apenas encima */
+            position: absolute;
+            pointer-events: none; /* Importante: el clic los atraviesa */
+            z-index: 1; /* Detrás del contenido principal */
             opacity: 0.9;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
         }
@@ -100,7 +100,7 @@
             max-width: 800px;
             margin: 0 auto;
             position: relative;
-            z-index: 5; /* El contenido va encima de los stickers */
+            z-index: 5; /* El contenido va ENCIMA de los stickers */
         }
 
         header {
@@ -159,7 +159,14 @@
             box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        .photo-card:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; }
+        .photo-card:hover { 
+            z-index: 20 !important;
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.7) !important;
+            border: 2px solid #9d4edd;
+        }
+
+        .photo-card:nth-child(odd):hover { transform: scale(1.25) rotate(6deg) !important; }
+        .photo-card:nth-child(even):hover { transform: scale(1.25) rotate(-6deg) !important; }
 
         .photo-card img {
             width: 100%;
@@ -225,13 +232,13 @@
 
     <img id="flying-snoopy" src="Snoopy.gif" alt="Snoopy volando">
 
-    <img src="Snoopycora.gif" class="sticker" style="top: 250px; left: 10px; width: 80px; transform: rotate(-10deg);">
+    <img src="Snoopycora.gif" class="sticker" style="top: 250px; left: 50px; width: 120px; transform: rotate(-10deg);">
 
-    <img src="Luffy5.gif" class="sticker" style="top: 750px; right: 10px; width: 100px; transform: rotate(5deg);">
+    <img src="Luffy.gif" class="sticker" style="top: 750px; right: 50px; width: 150px; transform: rotate(5deg);">
 
-    <img src="Luffy5.gif" class="sticker" style="top: 1300px; left: -10px; width: 90px; transform: rotate(-5deg);">
+    <img src="Luffy.gif" class="sticker" style="top: 1300px; left: 40px; width: 135px; transform: rotate(-5deg);">
 
-    <img src="Snoopycora.gif" class="sticker" style="top: 1800px; right: 20px; width: 70px; transform: rotate(15deg);">
+    <img src="Snoopycora.gif" class="sticker" style="top: 1800px; right: 40px; width: 105px; transform: rotate(15deg);">
 
 
     <div id="main-content">
@@ -283,7 +290,9 @@
                 <p>"Tqm Mafe"</p>
                 <strong>- Glenda</strong>
             </div>
-        </div> <footer>
+        </div>
+
+        <footer>
             <p>Hecho con 💜 y mucho código.</p>
         </footer>
     </div>
