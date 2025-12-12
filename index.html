@@ -9,7 +9,7 @@
     <style>
         /* --- ESTILOS GENERALES --- */
         body {
-            background-color: #1a1f1a; /* Verde militar casi negro */
+            background-color: #1a1f1a;
             color: #e0e0e0;
             font-family: 'Patrick Hand', cursive;
             margin: 0;
@@ -17,7 +17,17 @@
             text-align: center;
             background-image: radial-gradient(#2a302a 1px, transparent 1px);
             background-size: 20px 20px;
-            overflow: hidden;
+            overflow: hidden; /* Se desbloquea con JS al abrir el regalo */
+            position: relative; /* Necesario para los stickers */
+        }
+
+        /* --- STICKERS DECORATIVOS (NUEVO) --- */
+        .sticker {
+            position: absolute; /* Se mueven con el scroll */
+            pointer-events: none; /* No estorban al clic */
+            z-index: 1; /* Detrás del contenido principal o apenas encima */
+            opacity: 0.9;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
         }
 
         /* --- PANTALLA DE BIENVENIDA --- */
@@ -89,6 +99,8 @@
             padding: 20px;
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 5; /* El contenido va encima de los stickers */
         }
 
         header {
@@ -114,7 +126,7 @@
 
         p.subtitle { font-size: 1.4em; margin-top: 10px; color: #b0b0b0; }
 
-        /* --- BLOQUES DE MEMORIA (VERTICAL) --- */
+        /* --- BLOQUES DE MEMORIA --- */
         .memory-block {
             max-width: 500px;
             margin: 0 auto 100px auto;
@@ -207,11 +219,20 @@
     </audio>
 
     <div id="welcome-screen">
-        <img id="gift-trigger" src="Gift Box2.gif" alt="Abrir regalo">
+        <img id="gift-trigger" src="GiftBox2.gif" alt="Abrir regalo">
         <p>Toca la caja para abrir tu sorpresa</p>
     </div>
 
     <img id="flying-snoopy" src="Snoopy.gif" alt="Snoopy volando">
+
+    <img src="Snoopycora.gif" class="sticker" style="top: 250px; left: 10px; width: 80px; transform: rotate(-10deg);">
+
+    <img src="Luffy5.gif" class="sticker" style="top: 750px; right: 10px; width: 100px; transform: rotate(5deg);">
+
+    <img src="Luffy5.gif" class="sticker" style="top: 1300px; left: -10px; width: 90px; transform: rotate(-5deg);">
+
+    <img src="Snoopycora.gif" class="sticker" style="top: 1800px; right: 20px; width: 70px; transform: rotate(15deg);">
+
 
     <div id="main-content">
         <header>
@@ -262,9 +283,7 @@
                 <p>"Tqm Mafe"</p>
                 <strong>- Glenda</strong>
             </div>
-  
-
-        <footer>
+        </div> <footer>
             <p>Hecho con 💜 y mucho código.</p>
         </footer>
     </div>
@@ -301,10 +320,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
