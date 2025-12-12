@@ -9,7 +9,7 @@
     <style>
         /* --- ESTILOS GENERALES --- */
         body {
-            background-color: #1a1f1a;
+            background-color: #1a1f1a; /* Verde militar casi negro */
             color: #e0e0e0;
             font-family: 'Patrick Hand', cursive;
             margin: 0;
@@ -36,40 +36,16 @@
             transition: opacity 1s ease;
         }
 
-        /* Estilo para la caja de regalo */
         #gift-trigger {
             width: 250px;
             height: auto;
             cursor: pointer;
             transition: transform 0.2s ease;
             animation: float 3s ease-in-out infinite;
-            z-index: 2; /* Aseguramos que la caja esté por encima del fondo */
+            z-index: 2;
         }
 
         #gift-trigger:hover { transform: scale(1.05); }
-
-        /* --- NUEVO: ESTILO PARA SNOOPY VOLADOR --- */
-        #flying-snoopy {
-            position: fixed;
-            top: 15%; /* Aparecerá en la parte de arriba */
-            left: -50%; /* Empieza escondido afuera de la pantalla a la izquierda */
-            width: 300px; /* Ajusta el tamaño de Snoopy aquí */
-            z-index: 10000; /* Siempre encima de todo */
-            pointer-events: none; /* Para que no interfiera con clics */
-            display: none; /* Oculto al inicio */
-        }
-
-        /* Esta clase se agrega con JS para activar la animación */
-        .animate-flight {
-            display: block !important;
-            animation: flyAcross 4s linear forwards; /* Tarda 4 segundos en cruzar */
-        }
-
-        @keyframes flyAcross {
-            0% { left: -30%; transform: rotate(-5deg); }
-            100% { left: 120%; transform: rotate(5deg); } /* Termina afuera a la derecha */
-        }
-        /* ----------------------------------------- */
 
         #welcome-screen p {
             margin-top: 20px;
@@ -84,25 +60,45 @@
             100% { transform: translateY(0px); }
         }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
+        /* --- SNOOPY AVIADOR --- */
+        #flying-snoopy {
+            position: fixed;
+            top: 50%; 
+            left: -40%; 
+            width: 300px;
+            z-index: 10000;
+            pointer-events: none;
+            display: none; 
+        }
+
+        .animate-flight {
+            display: block !important;
+            animation: flightPath 4s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+        }
+
+        @keyframes flightPath {
+            0% { left: -30%; top: 50%; transform: rotate(-25deg); }
+            50% { left: 50%; top: 5%; transform: rotate(0deg) translateX(-50%); }
+            100% { left: 120%; top: 60%; transform: rotate(25deg); }
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
         #main-content {
             opacity: 0;
             transition: opacity 1.5s ease;
             padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* --- HEADER --- */
         header {
             padding: 40px 20px;
-            margin-bottom: 50px;
+            margin-bottom: 80px;
             background: #0f1115;
             border: 2px dashed #9d4edd;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
             transform: rotate(-1deg);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
             margin-top: 20px;
         }
 
@@ -118,14 +114,14 @@
 
         p.subtitle { font-size: 1.4em; margin-top: 10px; color: #b0b0b0; }
 
-        /* --- GALERÍA --- */
-        .gallery-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 50px;
+        /* --- BLOQUES DE MEMORIA (VERTICAL) --- */
+        .memory-block {
+            max-width: 500px;
+            margin: 0 auto 100px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
         .photo-card {
@@ -133,7 +129,9 @@
             padding: 12px 12px 50px 12px;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
             position: relative;
-            transition: transform 0.3s ease, z-index 0s;
+            transition: transform 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .photo-card::before {
@@ -149,14 +147,7 @@
             box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        .photo-card:nth-child(odd) { transform: rotate(2deg); }
-        .photo-card:nth-child(even) { transform: rotate(-2deg); }
-        
-        .photo-card:hover { 
-            transform: scale(1.1) rotate(0deg) !important; 
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
-        }
+        .photo-card:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; }
 
         .photo-card img {
             width: 100%;
@@ -165,38 +156,46 @@
             filter: contrast(1.1) brightness(0.9) sepia(0.4) saturate(0.8);
             transition: filter 0.5s ease;
         }
-
-        .photo-card:hover img {
-            filter: contrast(1) brightness(1) sepia(0) saturate(1.1);
-        }
+        .photo-card:hover img { filter: contrast(1) brightness(1) sepia(0) saturate(1.1); }
 
         .photo-card p { 
             margin-top: 15px; 
             font-weight: bold; 
-            color: #2b2b2b;
-            font-family: 'Patrick Hand', cursive;
+            color: #2b2b2b; 
+            font-family: 'Patrick Hand', cursive; 
         }
 
-        /* --- MENSAJES --- */
-        .messages-container {
-            max-width: 700px;
-            margin: 80px auto;
+        .note-card {
             background-color: #121212;
-            padding: 40px;
+            color: #d1d1d1;
+            padding: 20px;
+            width: 90%;
             border: 1px solid #333;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-left: 3px solid #9d4edd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             position: relative;
-            border-left: 4px solid #577590;
+            transform: rotate(-1deg);
+            font-size: 1.1em;
         }
 
-        .friend-note {
-            margin-bottom: 30px;
-            padding-left: 15px;
-            border-left: 2px solid #333;
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 45%;
+            width: 40px;
+            height: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: rotate(2deg);
         }
-        
-        .friend-note p { font-size: 1.3em; color: #d1d1d1; font-style: italic; }
-        .friend-note strong { color: #48cae4; font-size: 1.1em; }
+
+        .note-card strong {
+            display: block;
+            margin-top: 15px;
+            color: #c77dff;
+            text-align: right;
+            font-size: 0.9em;
+        }
 
         footer { margin-top: 50px; opacity: 0.5; font-size: 0.8em; margin-bottom: 20px; }
     </style>
@@ -204,11 +203,11 @@
 <body>
 
     <audio id="musica" loop>
-        <source src="Winter.mp3" type="audio/mpeg">
+        <source src="cancion.mp3" type="audio/mpeg">
     </audio>
 
     <div id="welcome-screen">
-        <img id="gift-trigger" src="Gift Box2.gif" alt="Abrir regalo">
+        <img id="gift-trigger" src="GiftBox.gif" alt="Abrir regalo">
         <p>Toca la caja para abrir tu sorpresa</p>
     </div>
 
@@ -220,65 +219,73 @@
             <p class="subtitle">Una colección de momentos especiales.</p>
         </header>
 
-        <div class="gallery-container">
+        <div class="memory-block">
             <div class="photo-card">
-                <img src="G1.png" alt="Recuerdo 1">
-                <p>Añade tu descripción</p>
+                <img src="G1.png" alt="Recuerdo G1">
+                <p>Descripción foto G1</p>
             </div>
+            <div class="note-card">
+                <p>"Escribe aquí el mensaje para la primera foto..."</p>
+                <strong>- Nombre del Amigo</strong>
             </div>
+        </div>
 
-        <div class="messages-container">
-            <h2>💌 Notas del grupo...</h2>
-            <div class="friend-note">
-                <p>"Mensaje bonito..."</p>
-                <strong>- Amigo 1</strong>
+        <div class="memory-block">
+            <div class="photo-card">
+                <img src="Astrid.jpeg" alt="Recuerdo Astrid">
+                <p>Descripción foto Astrid</p>
+            </div>
+            <div class="note-card">
+                <p>"Escribe aquí el mensaje para Astrid..."</p>
+                <strong>- Nombre del Amigo</strong>
+            </div>
+        </div>
+
+        <div class="memory-block">
+            <div class="photo-card">
+                <img src="Chicas Superpoderosas.jpeg" alt="Recuerdo Chicas Superpoderosas">
+                <p>Descripción foto Chicas Superpoderosas</p>
+            </div>
+            <div class="note-card">
+                <p>"Escribe aquí el mensaje para esta foto..."</p>
+                <strong>- Nombre del Amigo</strong>
             </div>
         </div>
 
         <footer>
-            <p>Hecho con 💜 y código.</p>
+            <p>Hecho con 💜 y mucho código.</p>
         </footer>
     </div>
 
     <script>
         document.getElementById('gift-trigger').addEventListener('click', function() {
             const giftImage = document.getElementById('gift-trigger');
-            const snoopy = document.getElementById('flying-snoopy'); // Seleccionamos al Snoopy oculto
+            const snoopy = document.getElementById('flying-snoopy');
             const overlay = document.getElementById('welcome-screen');
             const mainContent = document.getElementById('main-content');
             const audio = document.getElementById('musica');
             const textHint = overlay.querySelector('p');
 
-            // 1. Iniciamos música
             audio.volume = 0.6;
             audio.play().catch(e => console.log("Audio error:", e));
 
-            // 2. Ocultamos el texto y detenemos la animación de flotar de la caja
             textHint.style.display = 'none';
-            giftImage.style.animation = 'none'; // La caja se queda quieta esperando
+            giftImage.style.opacity = '0';
 
-            // 3. ¡LANZAMOS A SNOOPY!
-            // Le agregamos la clase CSS que hace que se mueva de izquierda a derecha
             snoopy.classList.add('animate-flight');
 
-            // 4. ESPERAMOS A QUE SNOOPY CRUCE (4 SEGUNDOS)
-            // Este tiempo debe coincidir con los "4s" que pusimos en el CSS de .animate-flight
             setTimeout(() => {
-                
-                // Una vez que Snoopy cruzó, hacemos la transición
-                overlay.style.opacity = '0'; // Desvanecer la pantalla negra
-                mainContent.style.opacity = '1'; // Mostrar fotos
-                document.body.style.overflow = 'auto'; // Permitir scroll
+                overlay.style.opacity = '0';
+                mainContent.style.opacity = '1';
+                document.body.style.overflow = 'auto';
 
-                // Eliminamos la pantalla de bienvenida por completo
                 setTimeout(() => {
                     overlay.style.display = 'none';
-                    snoopy.style.display = 'none'; // También quitamos a Snoopy para que no estorbe
+                    snoopy.style.display = 'none';
                 }, 1000);
 
-            }, 4000); // Esperamos 4000ms (4 segundos)
+            }, 4000);
         });
     </script>
-
 </body>
 </html>
