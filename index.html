@@ -29,8 +29,6 @@
             opacity: 0.9;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
         }
-        
-        /* ¡AQUÍ ESTABA EL ERROR! YA QUITÉ LA IMAGEN DE AQUÍ */
 
         /* --- PANTALLA DE BIENVENIDA --- */
         #welcome-screen {
@@ -224,11 +222,17 @@
         @media (max-width: 768px) {
             .sticker {
                 z-index: 20 !important; 
-                width: 80px !important; 
                 opacity: 0.8 !important; 
             }
             img[style*="left"] { left: -10px !important; }
             img[style*="right"] { right: -10px !important; }
+            
+            /* Ajuste Snoopy en móviles */
+            .sticker.snoopy-mobile {
+                top: 650px !important;    /* debajo de la nota */
+                right: 15px !important;   /* más a la derecha */
+                width: 70px !important;   /* más pequeño */
+            }
         }
     </style>
 </head>
@@ -253,10 +257,10 @@
 
     <img src="Snoopycora.gif" class="sticker" style="top: 1800px; right: 40px; width: 105px; transform: rotate(15deg);">
 
+    <!-- Snoopy que ajustamos para móviles -->
     <img src="https://media.giphy.com/media/Oj5MkUfa9yOSA/giphy.gif" 
-         class="sticker" 
-         style="top: 1050px; right: 80px; width: 90px; transform: rotate(0deg);">
-
+         class="sticker snoopy-mobile" 
+         style="top: 1100px; right: 40px; width: 90px; transform: rotate(0deg);">
 
     <div id="main-content">
         <header>
@@ -346,4 +350,3 @@
     </script>
 </body>
 </html>
-
