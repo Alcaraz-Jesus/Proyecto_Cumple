@@ -3,347 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños! 🌙</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <title>¡Feliz Cumpleaños Mafe! 🌙</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ESTILOS GENERALES --- */
+        /* --- 1. FONDO Y ATMÓSFERA --- */
         body {
-            background-color: #1a1f1a;
+            background: linear-gradient(135deg, #0a140a 0%, #1a0a1f 100%);
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png"), linear-gradient(135deg, #0a140a 0%, #1a0a1f 100%);
+            background-blend-mode: overlay;
             color: #e0e0e0;
-            font-family: 'Patrick Hand', cursive;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background-image: radial-gradient(#2a302a 1px, transparent 1px);
-            background-size: 20px 20px;
-            overflow: hidden; 
-            position: relative;
+            font-family: 'Indie Flower', cursive;
+            margin: 0; padding: 0; overflow-x: hidden;
         }
 
-        /* --- STICKERS DECORATIVOS --- */
-        .sticker {
+        /* --- 2. BIENVENIDA --- */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #050a05; z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: opacity 1s ease;
+        }
+        #gift-trigger {
+            width: 250px; cursor: pointer; transition: transform 0.2s;
+            animation: float 3s ease-in-out infinite;
+        }
+        #gift-trigger:hover { transform: scale(1.1); }
+        #welcome-screen p { color: #a8bda8; margin-top: 20px; font-family: 'Patrick Hand'; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- 3. SNOOPY AVIADOR --- */
+        #flying-snoopy {
+            position: fixed; top: 50%; left: -50%; width: 280px;
+            z-index: 10000; pointer-events: none; display: none;
+        }
+        .animate-flight { display: block !important; animation: flightPath 5s cubic-bezier(0.45, 0, 0.55, 1) forwards; }
+        @keyframes flightPath {
+            0% { left: -30%; top: 60%; transform: rotate(-20deg); }
+            40% { left: 40%; top: 10%; transform: rotate(0deg); }
+            100% { left: 120%; top: 40%; transform: rotate(20deg); }
+        }
+
+        /* --- 4. HEADER --- */
+        #main-content { opacity: 0; transition: opacity 2s ease; position: relative; padding-bottom: 100px; }
+        
+        header {
+            text-align: center; padding: 40px 30px 70px 30px; margin: 40px auto 60px auto;
+            position: relative; max-width: 700px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 15px; border: 1px solid rgba(0, 230, 118, 0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        h1.main-title {
+            font-family: 'Dancing Script', cursive; font-size: 3.5em; margin: 0;
+            background: linear-gradient(to right, #00e676, #d500f9);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.3)) drop-shadow(0 0 10px rgba(213, 0, 249, 0.3));
+        }
+        p.subtitle { font-size: 1.5em; color: #c7aecf; margin-top: 10px; }
+        .header-date {
+            position: absolute; bottom: 20px; right: 30px;
+            font-family: 'Patrick Hand', cursive; color: #00e676; 
+            font-size: 1.1em; letter-spacing: 1px; opacity: 0.9;
+        }
+
+        /* --- 5. TENDEDERO --- */
+        .fairy-string-container {
+            position: relative; max-width: 900px; margin: 0 auto 120px auto; padding-top: 40px;
+        }
+        .fairy-string {
+            position: absolute; top: 0; left: 10%; right: 10%; height: 40px;
+            border-bottom: 4px solid #5d4037; border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            filter: brightness(0.8) sepia(1) hue-rotate(90deg); z-index: 1;
+        }
+
+        /* --- LUCES --- */
+        .light {
+            position: absolute; width: 14px; height: 14px; border-radius: 50%;
+            animation: twinkle 2.5s infinite alternate ease-in-out; top: 36px;
+        }
+        .purple { background: #e040fb; box-shadow: 0 0 15px #e040fb, 0 0 30px #d500f9; }
+        .green { background: #00e676; box-shadow: 0 0 15px #00e676, 0 0 30px #69f0ae; }
+        .l1 { left: 20%; animation-delay: 0s; } .l2 { left: 40%; animation-delay: 0.7s; }
+        .l3 { left: 60%; animation-delay: 1.4s; } .l4 { left: 80%; animation-delay: 2.1s; }
+        @keyframes twinkle {
+            0% { opacity: 0.6; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* --- WRAPPER & CLIPS --- */
+        .hanging-items-wrapper {
+            display: flex; justify-content: center; align-items: flex-start;
+            gap: 50px; flex-wrap: wrap; position: relative; z-index: 2; top: 20px;
+        }
+        .fairy-string-container:nth-child(odd) .hanging-items-wrapper { flex-direction: row-reverse; }
+        .clip {
+            width: 12px; height: 28px; background: linear-gradient(to bottom, #333, #111);
+            border-radius: 4px; position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+            z-index: 5; box-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* --- FOTO CARD --- */
+        .photo-card {
+            background: #fff; padding: 10px 10px 40px 10px; width: 280px;
+            transform: rotate(-3deg); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .photo-card img { width: 100%; border-radius: 2px; filter: sepia(10%) contrast(1.1); transition: filter 0.3s;}
+        .photo-card p {
+            color: #222; margin-top: 15px; font-weight: bold; font-family: 'Patrick Hand';
+            text-align: center; font-size: 1.1em;
+        }
+
+        /* HOVER COLORS (Verde par, Morado impar) */
+        .photo-card:hover { transform: scale(1.25) rotate(5deg) !important; z-index: 50; }
+        .photo-card:hover img { filter: none; }
+        .fairy-string-container:nth-child(even) .photo-card:hover { /* 1ra, 3ra */
+             box-shadow: 0 0 30px rgba(0, 230, 118, 0.8), 0 0 80px rgba(105, 240, 174, 0.5);
+             border: 2px solid #69f0ae;
+        }
+        .fairy-string-container:nth-child(odd) .photo-card:hover { /* 2da, 4ta */
+             box-shadow: 0 0 30px rgba(213, 0, 249, 0.8), 0 0 80px rgba(170, 0, 255, 0.5);
+             border: 2px solid #ea80fc;
+        }
+
+        /* --- NOTA CARD & MINI STICKERS --- */
+        .note-card {
+            background-color: #1a1a1a; color: #d1c4e9; padding: 20px; width: 240px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7); transform: rotate(3deg); position: relative;
+            font-size: 1.1em; line-height: 1.5; border: 1px solid #2c2c2c;
+            border-left: 3px solid #7c4dff; 
+            background-image: repeating-linear-gradient(#1a1a1a 0px, #1a1a1a 24px, #333 25px);
+        }
+        .note-card strong { display: block; margin-top: 15px; color: #b388ff; text-align: right; }
+        
+        /* Estilo para el sticker PEQUEÑO dentro de la nota */
+        .mini-sticker {
             position: absolute;
-            pointer-events: none; /* Importante: el clic los atraviesa */
-            z-index: 1; /* Detrás del contenido principal */
+            bottom: -15px;
+            right: -15px;
+            width: 60px; /* Tamaño del sticker en la nota */
             opacity: 0.9;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+            transform: rotate(15deg);
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+            z-index: 6;
+        }
+
+        /* --- STICKERS GLOBALES --- */
+        .global-sticker { 
+            position: absolute; pointer-events: none; z-index: 1; opacity: 0.85; mix-blend-mode: lighten; 
         }
         
-        /* ¡AQUÍ ESTABA EL ERROR! YA QUITÉ LA IMAGEN DE AQUÍ */
+        footer { margin-top: 80px; color: #666; font-size: 0.9em; }
 
-        /* --- PANTALLA DE BIENVENIDA --- */
-        #welcome-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0f1115;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease;
-        }
-
-        #gift-trigger {
-            width: 250px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            animation: float 3s ease-in-out infinite;
-            z-index: 2;
-        }
-
-        #gift-trigger:hover { transform: scale(1.05); }
-
-        #welcome-screen p {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #b0b0b0;
-            opacity: 0.7;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* --- SNOOPY AVIADOR --- */
-        #flying-snoopy {
-            position: fixed;
-            top: 50%; 
-            left: -40%; 
-            width: 300px;
-            z-index: 10000;
-            pointer-events: none;
-            display: none; 
-        }
-
-        .animate-flight {
-            display: block !important;
-            animation: flightPath 4s cubic-bezier(0.45, 0, 0.55, 1) forwards;
-        }
-
-        @keyframes flightPath {
-            0% { left: -30%; top: 50%; transform: rotate(-25deg); }
-            50% { left: 50%; top: 5%; transform: rotate(0deg) translateX(-50%); }
-            100% { left: 120%; top: 60%; transform: rotate(25deg); }
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        #main-content {
-            opacity: 0;
-            transition: opacity 1.5s ease;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 5; /* El contenido va ENCIMA de los stickers */
-        }
-
-        header {
-            padding: 40px 20px;
-            margin-bottom: 80px;
-            background: #0f1115;
-            border: 2px dashed #9d4edd;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
-            transform: rotate(-1deg);
-            margin-top: 20px;
-        }
-
-        h1.main-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5em;
-            background: linear-gradient(to right, #c77dff, #90e0ef);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        p.subtitle { font-size: 1.4em; margin-top: 10px; color: #b0b0b0; }
-
-        /* --- BLOQUES DE MEMORIA --- */
-        .memory-block {
-            max-width: 500px;
-            margin: 0 auto 100px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .photo-card {
-            background: #dadada;
-            padding: 12px 12px 50px 12px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
-            position: relative;
-            transition: transform 0.3s ease;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .photo-card::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 35%;
-            width: 30%;
-            height: 30px;
-            background-color: rgba(69, 123, 157, 0.8); 
-            transform: rotate(-3deg);
-            z-index: 1;
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .photo-card:hover { 
-            z-index: 20 !important;
-            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.7) !important;
-            border: 2px solid #9d4edd;
-        }
-
-        .photo-card:nth-child(odd):hover { transform: scale(1.25) rotate(6deg) !important; }
-        .photo-card:nth-child(even):hover { transform: scale(1.25) rotate(-6deg) !important; }
-
-        .photo-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 2px;
-            filter: contrast(1.1) brightness(0.9) sepia(0.4) saturate(0.8);
-            transition: filter 0.5s ease;
-        }
-        .photo-card:hover img { filter: contrast(1) brightness(1) sepia(0) saturate(1.1); }
-
-        .photo-card p { 
-            margin-top: 15px; 
-            font-weight: bold; 
-            color: #2b2b2b; 
-            font-family: 'Patrick Hand', cursive; 
-        }
-
-        .note-card {
-            background-color: #121212;
-            color: #d1d1d1;
-            padding: 20px;
-            width: 90%;
-            border: 1px solid #333;
-            border-left: 3px solid #9d4edd;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            position: relative;
-            transform: rotate(-1deg);
-            font-size: 1.1em;
-        }
-
-        .note-card::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 45%;
-            width: 40px;
-            height: 15px;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: rotate(2deg);
-        }
-
-        .note-card strong {
-            display: block;
-            margin-top: 15px;
-            color: #c77dff;
-            text-align: right;
-            font-size: 0.9em;
-        }
-
-        footer { margin-top: 50px; opacity: 0.5; font-size: 0.8em; margin-bottom: 20px; }
-
-        /* --- ARREGLO PARA CELULARES (MEDIA QUERY) --- */
+        /* --- MÓVIL --- */
         @media (max-width: 768px) {
-            .sticker {
-                z-index: 20 !important; 
-                width: 80px !important; 
-                opacity: 0.8 !important; 
+            .fairy-string-container:nth-child(odd) .hanging-items-wrapper { flex-direction: column; }
+            .hanging-items-wrapper { flex-direction: column; align-items: center; top: 10px; gap: 60px; }
+            .fairy-string { border-bottom: none; }
+            .photo-card::before, .note-card::before {
+                content: ''; position: absolute; top: -30px; left: 50%; height: 30px; width: 4px;
+                background: #5d4037; filter: brightness(0.8);
             }
-            img[style*="left"] { left: -10px !important; }
-            img[style*="right"] { right: -10px !important; }
+            .clip { top: -10px; }
+            
+            /* Ajustes Stickers Móvil */
+            .global-sticker { width: 80px !important; z-index: 20 !important; opacity: 1 !important; mix-blend-mode: normal; }
+            /* Forzar posiciones a las orillas en móvil */
+            .global-sticker[style*="left"] { left: -10px !important; } 
+            .global-sticker[style*="right"] { right: -10px !important; }
+            
+            .header-date { bottom: 10px; right: 20px; font-size: 1em; }
         }
     </style>
 </head>
 <body>
 
     <audio id="musica" loop>
-        <source src="cancion.mp3" type="audio/mpeg">
+        <source src="Winter.mp3" type="audio/mpeg">
     </audio>
 
     <div id="welcome-screen">
-        <img id="gift-trigger" src="Gift Box2.gif" alt="Abrir regalo">
-        <p>Toca la caja para abrir tu sorpresa <3 </p>
+        <img id="gift-trigger" src="Gift Box2.gif" alt="Abrir">
+        <p>Toca la caja para abrir tu regalo ✨</p>
     </div>
 
-    <img id="flying-snoopy" src="Snoopy.gif" alt="Snoopy volando">
+    <img id="flying-snoopy" src="Snoopy.gif" alt="Vuelo">
 
-    <img src="Snoopycora.gif" class="sticker" style="top: 250px; left: 50px; width: 120px; transform: rotate(-10deg);">
-
-    <img src="Luffy5.gif" class="sticker" style="top: 750px; right: 50px; width: 150px; transform: rotate(5deg);">
-
-    <img src="Luffy5.gif" class="sticker" style="top: 1300px; left: 40px; width: 135px; transform: rotate(-5deg);">
-
-    <img src="Snoopycora.gif" class="sticker" style="top: 1800px; right: 40px; width: 105px; transform: rotate(15deg);">
-
-    <img src="https://media.giphy.com/media/Oj5MkUfa9yOSA/giphy.gif" 
-         class="sticker" 
-         style="top: 1050px; right: 80px; width: 90px; transform: rotate(0deg);">
+    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" class="global-sticker" style="top: 150px; left: 5%; width: 120px; transform: rotate(-10deg);">
+    
+    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="global-sticker" style="top: 550px; right: 2%; width: 150px;">
+    
+    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="global-sticker" style="top: 1100px; left: 2%; width: 140px; transform: scaleX(-1);">
+    
+    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" class="global-sticker" style="top: 1600px; right: 5%; width: 110px; transform: rotate(15deg);">
 
 
     <div id="main-content">
         <header>
-            <h1 class="main-title">¡Feliz Cumpleañooooos Mafeee! 🌙</h1>
-            <p class="subtitle">Una colección de momentos especiales <3</p>
+            <h1 class="main-title">¡Feliz Cumpleaños Mafe!</h1>
+            <p class="subtitle">✨ Un bosque de recuerdos ✨</p>
+            <div class="header-date">18/12/2025</div>
         </header>
 
-        <div class="memory-block">
-            <div class="photo-card">
-                <img src="G1.png" alt="Recuerdo G1">
-                <p>Después de nuestro partido (me ganaste)</p>
-            </div>
-            <div class="note-card">
-                <p>"One piece me enseñó que puedo escoger a mi familia y por eso eres mi hermanita"</p>
-                <strong>- Lisiado</strong>
-            </div>
-        </div>
-
-        <div class="memory-block">
-            <div class="photo-card">
-                <img src="Astrid.jpeg" alt="Recuerdo Astrid">
-                <p>Uno de nuestros tantos días en la prepa</p>
-            </div>
-            <div class="note-card">
-                <p>"Te quiero mucho corazón de melón"</p>
-                <strong>- Astrid</strong>
+        <div class="fairy-string-container">
+            <div class="fairy-string"></div>
+            <div class="light l1 purple"></div><div class="light l2 green"></div><div class="light l3 purple"></div><div class="light l4 green"></div>
+            <div class="hanging-items-wrapper">
+                <div class="photo-card">
+                    <div class="clip"></div>
+                    <img src="G1.png" alt="G1">
+                    <p>Después de nuestro partido en contra (me ganaste)</p>
+                </div>
+                <div class="note-card">
+                    <div class="clip"></div>
+                    <p>"One piece me enseñó que puedo escoger a mi familia y por eso eres mi hermanita"</p>
+                    <strong>- Lisiado</strong>
+                    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="mini-sticker" style="width: 80px; right: -55px;">
+                </div>
             </div>
         </div>
 
-        <div class="memory-block">
-            <div class="photo-card">
-                <img src="Chicas Superpoderosas.jpeg" alt="Recuerdo Chicas Superpoderosas">
-                <p>Hola, no sé q poner pero me gusta el limón</p>
-            </div>
-            <div class="note-card">
-                <p>"No importa lo que pase, siempre, siempre habrá limones para todo"</p>
-                <strong>- Zam</strong>
+        <div class="fairy-string-container">
+            <div class="fairy-string"></div>
+            <div class="light l1 green"></div><div class="light l2 purple"></div><div class="light l3 green"></div><div class="light l4 purple"></div>
+            <div class="hanging-items-wrapper">
+                <div class="photo-card">
+                    <div class="clip"></div>
+                    <img src="Astrid.jpeg" alt="Astrid">
+                    <p>Uno de nuestros tantos días en la prepa</p>
+                </div>
+                <div class="note-card">
+                    <div class="clip"></div>
+                    <p>"Te quiero mucho corazón de melon"</p>
+                    <strong>- Astrid</strong>
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHl5ZmZ5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5/3o6ZtpW1uAB1QjM6k0/giphy.gif" class="mini-sticker" style="width: 50px;">
+                </div>
             </div>
         </div>
 
-        <div class="memory-block">
-            <div class="photo-card">
-                <img src="Todas.jpeg" alt="Reunión de todas">
-                <p>Primera vez que se reunieron todas (y última también)</p>
+        <div class="fairy-string-container">
+            <div class="fairy-string"></div>
+            <div class="light l1 purple"></div><div class="light l2 green"></div><div class="light l3 purple"></div><div class="light l4 green"></div>
+            <div class="hanging-items-wrapper">
+                <div class="photo-card">
+                    <div class="clip"></div>
+                    <img src="Chicas Superpoderosas.jpeg" alt="Chicas">
+                    <p>Hola, no sé q poner pero me gusta el limón</p>
+                </div>
+                <div class="note-card">
+                    <div class="clip"></div>
+                    <p>"No importa lo que pase, siempre, siempre habrá limones para todo"</p>
+                    <strong>- Zam</strong>
+                    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" class="mini-sticker">
+                </div>
             </div>
+        </div>
 
-            <div class="note-card">
-                <p>"Tqm Mafe"</p>
-                <strong>- Glenda</strong>
+         <div class="fairy-string-container">
+            <div class="fairy-string"></div>
+            <div class="light l1 green"></div><div class="light l2 purple"></div><div class="light l3 green"></div><div class="light l4 purple"></div>
+            <div class="hanging-items-wrapper">
+                <div class="photo-card">
+                    <div class="clip"></div>
+                    <img src="Todas.jpeg" alt="Todas">
+                    <p>Primera vez que se reunieron todas (y última también)</p>
+                </div>
+                <div class="note-card">
+                    <div class="clip"></div>
+                    <p>"Tqm Mafe"</p>
+                    <strong>- Glenda</strong>
+                    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="mini-sticker" style="width: 70px; right: -25px;">
+                </div>
             </div>
         </div>
 
         <footer>
-            <p>Hecho con 💜 y mucho código.</p>
+            <p>Hecho con 💜 para ti.</p>
         </footer>
     </div>
 
     <script>
         document.getElementById('gift-trigger').addEventListener('click', function() {
-            const giftImage = document.getElementById('gift-trigger');
+            const gift = document.getElementById('gift-trigger');
             const snoopy = document.getElementById('flying-snoopy');
             const overlay = document.getElementById('welcome-screen');
-            const mainContent = document.getElementById('main-content');
+            const main = document.getElementById('main-content');
             const audio = document.getElementById('musica');
-            const textHint = overlay.querySelector('p');
+            const txt = overlay.querySelector('p');
 
-            audio.volume = 0.6;
-            audio.play().catch(e => console.log("Audio error:", e));
+            audio.volume = 0.5;
+            audio.play().catch(e => console.log(e));
 
-            textHint.style.display = 'none';
-            giftImage.style.opacity = '0';
-
+            txt.style.display = 'none';
+            gift.style.opacity = '0';
+            
             snoopy.classList.add('animate-flight');
 
             setTimeout(() => {
                 overlay.style.opacity = '0';
-                mainContent.style.opacity = '1';
-                document.body.style.overflow = 'auto';
-
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    snoopy.style.display = 'none';
-                }, 1000);
-
-            }, 4000);
+                main.style.opacity = '1';
+                setTimeout(() => { overlay.style.display = 'none'; snoopy.style.display = 'none'; }, 1000);
+            }, 4500); 
         });
     </script>
 </body>
 </html>
-
