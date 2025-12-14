@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. FONDO Y ATMÓSFERA --- */
+        /* --- 1. FONDO Y ATMÓSFERA MÍSTICA --- */
         body {
             background: linear-gradient(135deg, #0a140a 0%, #1a0a1f 100%);
             background-image: url("https://www.transparenttextures.com/patterns/stardust.png"), linear-gradient(135deg, #0a140a 0%, #1a0a1f 100%);
@@ -44,27 +44,113 @@
         }
 
         /* --- 4. HEADER --- */
-        #main-content { opacity: 0; transition: opacity 2s ease; position: relative; padding-bottom: 100px; }
+        #main-content { opacity: 0; transition: opacity 2s ease; position: relative; padding-bottom: 150px; }
         
-        header {
-            text-align: center; padding: 40px 30px 70px 30px; margin: 40px auto 60px auto;
-            position: relative; max-width: 700px;
-            background-color: rgba(255, 255, 255, 0.03);
-            border-radius: 15px; border: 1px solid rgba(0, 230, 118, 0.3);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        /* --- NUEVO HEADER NEÓN --- */
+        /* --- HEADER ESTILO TARJETA NEÓN --- */
+/* --- HEADER ESTILO NEÓN LADRILLO (REPLICA EXACTA) --- */
+       header {
+            text-align: center;
+            padding: 40px 20px 50px 20px;
+            margin: 80px auto 80px auto; /* Aumenté el margen superior para darle espacio a la foto */
+            position: relative;
+            max-width: 600px;
+            /* ... resto de propiedades de fondo y borde ... */
+            
+            /* --- CAMBIO IMPORTANTE --- */
+            overflow: visible; /* Esto permite que la foto de ella se salga del cuadro */
         }
-        h1.main-title {
-            font-family: 'Dancing Script', cursive; font-size: 3.5em; margin: 0;
-            background: linear-gradient(to right, #00e676, #d500f9);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.3)) drop-shadow(0 0 10px rgba(213, 0, 249, 0.3));
+
+        /* Contenedor Flex para apilar los textos y Snoopy */
+        .neon-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
         }
-        p.subtitle { font-size: 1.5em; color: #c7aecf; margin-top: 10px; }
+
+        /* Estilo para "¡Feliz" y "Mafe!" (Letra de molde, contorno morado) */
+       /* Estilo para "¡Feliz" y "Mafe!" (CORREGIDO PARA LEGIBILIDAD) */
+        .neon-outline-purple {
+            font-family: 'Dancing Script', sans-serif;
+            font-size: 4.5em;
+            line-height: 0.8;
+            margin: 10px 0;
+            font-weight: bold;
+            
+            /* --- CAMBIO CLAVE AQUÍ --- */
+            /* Antes era 'transparent'. Ahora usamos un morado muy pálido para rellenar la letra */
+            color: #e040fb; 
+            
+            /* Mantenemos el borde vibrante */
+            -webkit-text-stroke: .5px #e040fb;
+            transform: rotate(-3deg);
+            /* Suavizamos ligeramente el segundo brillo para que defina mejor la forma */
+            filter: drop-shadow(0 0 5px #e040fb) drop-shadow(0 0 15px #e040fb) ;
+        }
+
+        /* Estilo para "Cumpleaños" (Cursiva, relleno verde) */
+        .neon-cursive-green {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5em;
+            margin: -10px 0; /* Superponer un poco */
+            color: #00e676; /* Verde Neón */
+            text-shadow: 
+                0 0 5px #00e676,
+                0 0 15px #00e676,
+                0 0 30px #00e676;
+            transform: rotate(-3deg); /* Ligeramente inclinado */
+            z-index: 3; /* Encima de Snoopy */
+        }
+
+        /* Subtítulo */
+        p.subtitle { 
+            font-size: 1.4em; 
+            color: #c7aecf; /* Lila suave */
+            margin-top: 25px;
+            font-family: 'Patrick Hand', cursive;
+            text-shadow: 0 0 5px #d500f9;
+        }
+        .subtitle span { color: #00e676; text-shadow: 0 0 5px #00e676; } /* Estrellas verdes */
+
         .header-date {
-            position: absolute; bottom: 20px; right: 30px;
-            font-family: 'Patrick Hand', cursive; color: #00e676; 
-            font-size: 1.1em; letter-spacing: 1px; opacity: 0.9;
+            position: absolute; bottom: 10px; right: 15px;
+            font-family: 'Patrick Hand', cursive; color: #d500f9; 
+            font-size: 1em; opacity: 0.8; text-shadow: 0 0 5px #d500f9;
         }
+
+        /* Snoopy en Círculo Neón (VERDE como en la foto) */
+        .snoopy-circle-container {
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            border: 3px solid #00e676; /* Borde Verde */
+            box-shadow: 0 0 15px #00e676, inset 0 0 15px #00e676;
+            background: rgba(0,0,0,0.5);
+            display: flex; justify-content: center; align-items: center;
+            margin: 5px 0;
+            position: relative;
+        }
+        .snoopy-circle-container img { width: 85%; height: auto; padding-top: 10px; }
+
+        /* Decoraciones SVG (Posicionamiento Absoluto) */
+        .deco-svg { position: absolute; pointer-events: none; }
+        
+        /* Ajuste para Móvil */
+        @media (max-width: 768px) {
+            header { padding: 30px 10px 50px 10px; }
+            .neon-outline-purple { font-size: 3em; }
+            .neon-cursive-green { font-size: 3.2em; }
+            .snoopy-circle-container { width: 130px; height: 130px; }
+        }
+
+        /* Elementos Decorativos Neón (SVG) (NUEVO) */
+        .neon-deco { position: absolute; pointer-events: none; }
+        .balloons { top: 20px; right: 30px; width: 80px; }
+        .cake { bottom: 30px; left: 30px; width: 70px; }
+        .hearts-right { top: 50%; right: 20px; transform: translateY(-50%); width: 60px; }
+        .hearts-left { top: 50%; left: 20px; transform: translateY(-50%); width: 60px; }
 
         /* --- 5. TENDEDERO --- */
         .fairy-string-container {
@@ -72,7 +158,7 @@
         }
         .fairy-string {
             position: absolute; top: 0; left: 10%; right: 10%; height: 40px;
-            border-bottom: 4px solid #5d4037; border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            border-bottom: 7px solid #5d4037; border-radius: 0 0 50% 50% / 0 0 100% 100%;
             filter: brightness(0.8) sepia(1) hue-rotate(90deg); z-index: 1;
         }
 
@@ -92,7 +178,7 @@
         /* --- WRAPPER & CLIPS --- */
         .hanging-items-wrapper {
             display: flex; justify-content: center; align-items: flex-start;
-            gap: 50px; flex-wrap: wrap; position: relative; z-index: 2; top: 20px;
+            gap: 50px; flex-wrap: wrap; position: relative; z-index: 2; top: 50px;
         }
         .fairy-string-container:nth-child(odd) .hanging-items-wrapper { flex-direction: row-reverse; }
         .clip {
@@ -103,30 +189,50 @@
 
         /* --- FOTO CARD --- */
         .photo-card {
-            background: #fff; padding: 10px 10px 40px 10px; width: 280px;
+            background: #fff; 
+            padding: 12px 12px 25px 12px; 
+            width: 320px;
             transform: rotate(-3deg); position: relative;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .photo-card img { width: 100%; border-radius: 2px; filter: sepia(10%) contrast(1.1); transition: filter 0.3s;}
+        
+        /* === EFECTO B&W === */
+/* --- FOTO Y VIDEO CARD (ESTILO UNIFICADO) --- */
+        .photo-card img, .photo-card video { 
+            width: 100%; 
+            border-radius: 2px; 
+            /* Empiezan en Blanco y Negro */
+            filter: grayscale(100%) contrast(1.1); 
+            transition: filter 0.3s ease;
+            object-fit: cover; /* Asegura que rellene bien el espacio */
+        }
+        
         .photo-card p {
-            color: #222; margin-top: 15px; font-weight: bold; font-family: 'Patrick Hand';
-            text-align: center; font-size: 1.1em;
+            color: #222; margin-top: 8px;
+            font-weight: bold; font-family: 'Patrick Hand';
+            text-align: center; font-size: 1.1em; margin-bottom: 0;
         }
 
-        /* HOVER COLORS (Verde par, Morado impar) */
+        /* HOVER: RECUPERAR COLOR */
         .photo-card:hover { transform: scale(1.25) rotate(5deg) !important; z-index: 50; }
-        .photo-card:hover img { filter: none; }
-        .fairy-string-container:nth-child(even) .photo-card:hover { /* 1ra, 3ra */
+        
+        /* Al pasar el mouse, tanto img como video recuperan color */
+        .photo-card:hover img, .photo-card:hover video { 
+            filter: grayscale(0%) contrast(1); 
+        }
+
+        /* Colores de Borde/Sombra en Hover */
+        .fairy-string-container:nth-child(even) .photo-card:hover {
              box-shadow: 0 0 30px rgba(0, 230, 118, 0.8), 0 0 80px rgba(105, 240, 174, 0.5);
              border: 2px solid #69f0ae;
         }
-        .fairy-string-container:nth-child(odd) .photo-card:hover { /* 2da, 4ta */
+        .fairy-string-container:nth-child(odd) .photo-card:hover {
              box-shadow: 0 0 30px rgba(213, 0, 249, 0.8), 0 0 80px rgba(170, 0, 255, 0.5);
              border: 2px solid #ea80fc;
         }
 
-        /* --- NOTA CARD & MINI STICKERS --- */
+        /* --- NOTA CARD --- */
         .note-card {
             background-color: #1a1a1a; color: #d1c4e9; padding: 20px; width: 240px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.7); transform: rotate(3deg); position: relative;
@@ -136,50 +242,131 @@
         }
         .note-card strong { display: block; margin-top: 15px; color: #b388ff; text-align: right; }
         
-        /* Estilo para el sticker PEQUEÑO dentro de la nota */
+        /* MINI STICKERS */
         .mini-sticker {
-            position: absolute;
-            bottom: -15px;
-            right: -15px;
-            width: 60px; /* Tamaño del sticker en la nota */
-            opacity: 0.9;
-            transform: rotate(15deg);
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
-            z-index: 6;
+            position: absolute; bottom: -15px; right: -15px;
+            width: 55px; opacity: 0.9; transform: rotate(10deg);
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5)); z-index: 6;
         }
 
-        /* --- STICKERS GLOBALES --- */
+        /* STICKERS GLOBALES */
         .global-sticker { 
-            position: absolute; pointer-events: none; z-index: 1; opacity: 0.85; mix-blend-mode: lighten; 
+            position: absolute; pointer-events: none; z-index: 1; opacity: 0.85; mix-blend-mode: normal; 
         }
-        
-        footer { margin-top: 80px; color: #666; font-size: 0.9em; }
+        /* Foto de la Cumpleañera Señalando */
+        .cumpleanera-senalando {
+            position: absolute;
+            /* Ajusta estos valores según la foto para que apunte bien */
+            bottom: -20px; /* Que parezca que está parada en el borde inferior */
+            left: -80px;   /* Que salga por la izquierda */
+            width: 180px;  /* Tamaño de la foto */
+            height: auto;
+            z-index: 10;   /* Para que quede por encima de todo el header */
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5)); /* Sombrita para que resalte */
+            transform: rotate(5deg); /* Un ligero ángulo queda divertido */
+        }
 
-        /* --- MÓVIL --- */
+        /* Ajuste para Celulares */
         @media (max-width: 768px) {
-            .fairy-string-container:nth-child(odd) .hanging-items-wrapper { flex-direction: column; }
-            .hanging-items-wrapper { flex-direction: column; align-items: center; top: 10px; gap: 60px; }
-            .fairy-string { border-bottom: none; }
-            .photo-card::before, .note-card::before {
-                content: ''; position: absolute; top: -30px; left: 50%; height: 30px; width: 4px;
-                background: #5d4037; filter: brightness(0.8);
+            .cumpleanera-senalando {
+                width: 140px; /* Más pequeña en móvil */
+                left: -40px;
+                bottom: -10px;
             }
-            .clip { top: -10px; }
+            header {
+                 /* Más margen arriba en celular */
+                margin-top: 60px; 
+                /* Un poco más de padding a la izquierda para que el texto no se encime con la foto */
+                padding-left: 40px; 
+            }
+        }
+
+       footer { 
+            /* Aumentamos mucho el margen superior para empujarlo hasta abajo */
+            margin-top: 180px;  /* Antes era 80px */
             
-            /* Ajustes Stickers Móvil */
-            .global-sticker { width: 80px !important; z-index: 20 !important; opacity: 1 !important; mix-blend-mode: normal; }
-            /* Forzar posiciones a las orillas en móvil */
-            .global-sticker[style*="left"] { left: -10px !important; } 
-            .global-sticker[style*="right"] { right: -10px !important; }
+            color: #666; 
+            font-size: 0.9em; 
+            text-align: center; 
+            width: 100%;
             
-            .header-date { bottom: 10px; right: 20px; font-size: 1em; }
+            /* Un poquito más de espacio al final de la página */
+            padding-bottom: 40px; /* Antes era 20px */
+        }
+        /* --- MÓVIL --- */
+       /* --- MÓVIL (ACTUALIZADO) --- */
+        @media (max-width: 768px) {
+            /* ... Tus reglas anteriores del header en móvil ... */
+            header { padding: 30px 10px 50px 10px; }
+            .neon-outline-purple { font-size: 3em; }
+            .neon-cursive-green { font-size: 3.2em; }
+            .snoopy-circle-container { width: 130px; height: 130px; }
+
+            /* NUEVOS AJUSTES PARA LAS FOTOS EN MÓVIL */
+            .header-wrapper-completo {
+                margin: 60px auto 80px auto;
+                max-width: 95%; /* Usar casi todo el ancho */
+            }
+            .pointing-girl {
+                height: 280px; /* Mucho más pequeñas en celular */
+                bottom: -20px;
+                z-index: 1; /* En móvil, ponerlas DETRÁS del texto para que se lea */
+                opacity: 0.9;
+            }
+            .girl-left { left: -40px; }
+            .girl-right { right: -40px; }
+        }
+
+        /* --- NUEVO: Envoltorio para el Header y las Fotos --- */
+        .header-wrapper-completo {
+            position: relative;
+            max-width: 900px; /* Ancho máximo total */
+            margin: 100px auto 120px auto; /* Margen superior e inferior para dar espacio a las fotos */
+            /* border: 1px solid red; /* Descomenta esto si necesitas ver los límites */
+        }
+
+        /* Ajuste necesario al header existente */
+        header {
+            margin: 0 auto; /* Quitamos el margen que tenía antes para que el envoltorio lo controle */
+            /* Asegúrate que el header NO tenga 'overflow: hidden' si lo agregaste antes */
+        }
+
+        /* --- Estilos para las chicas señalando --- */
+        .pointing-girl {
+            position: absolute;
+            bottom: -40px; /* Ajusta esto para subir/bajar las imágenes respecto al borde inferior del neón */
+            height: 550px; /* ¡Aquí controlas qué tan GRANDES se ven! */
+            width: auto;
+            z-index: 20; /* Para que queden por encima del marco de neón */
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6)); /* Sombra para que resalten del fondo */
+            pointer-events: none; /* Para que no interfieran con clicks */
+        }
+
+        /* Foto Izquierda (Blusa blanca, señalando derecha) */
+        .girl-left {
+            left: -160px; /* Qué tanto se sale hacia la izquierda */
+            transform: rotate(2deg); /* Un ligero ángulo para dinamismo */
+        }
+
+        /* Foto Derecha (Blusa negra, señalando izquierda) */
+        /* Foto Derecha (Blusa negra, señalando izquierda) - AJUSTADA */
+        .girl-right {
+            /* La hacemos más pequeña (sobrescribe la altura general de 550px) */
+            height: 350px; 
+            
+            /* Ajustamos la posición para que quede bien con el nuevo tamaño */
+            right: -90px; 
+            bottom: -70px;
+            
+            /* La rotamos más para que apunte mejor al centro */
+            transform: rotate(-3deg);
         }
     </style>
 </head>
 <body>
 
     <audio id="musica" loop>
-        <source src="Winter.mp3" type="audio/mpeg">
+        <source src="Winter(recortada).mp3" type="audio/mpeg">
     </audio>
 
     <div id="welcome-screen">
@@ -187,21 +374,40 @@
         <p>Toca la caja para abrir tu regalo ✨</p>
     </div>
 
-    <img id="flying-snoopy" src="Snoopy.gif" alt="Vuelo">
-
-    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" class="global-sticker" style="top: 150px; left: 5%; width: 120px; transform: rotate(-10deg);">
-    
-    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="global-sticker" style="top: 550px; right: 2%; width: 150px;">
-    
-    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="global-sticker" style="top: 1100px; left: 2%; width: 140px; transform: scaleX(-1);">
-    
-    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" class="global-sticker" style="top: 1600px; right: 5%; width: 110px; transform: rotate(15deg);">
+    <img id="flying-snoopy" src="Snoopy.gif" alt="Vuelo">   
 
 
     <div id="main-content">
-        <header>
-            <h1 class="main-title">¡Feliz Cumpleaños Mafe!</h1>
-            <p class="subtitle">✨ Un bosque de recuerdos ✨</p>
+       <header>
+<div class="header-wrapper-completo">
+            
+            <img src="mafeizquierda.png" alt="Mafe señalando derecha" class="pointing-girl girl-left">
+
+            <img src="mafederecha.png" alt="Mafe señalando izquierda" class="pointing-girl girl-right">            <svg class="deco-svg" style="top: 60px; left: 20px; width: 60px; filter: drop-shadow(0 0 5px #00e676);" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01" stroke="#d500f9"/><path d="M12 4h.01" stroke="#d500f9"/><path d="M17 4h.01" stroke="#d500f9"/></svg>
+            
+            <svg class="deco-svg" style="bottom: 50px; left: 30px; width: 50px; filter: drop-shadow(0 0 5px #d500f9);" viewBox="0 0 24 24" fill="none" stroke="#d500f9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01" stroke="#00e676"/><path d="M12 4h.01" stroke="#00e676"/><path d="M17 4h.01" stroke="#00e676"/></svg>
+
+            <svg class="deco-svg" style="top: 40px; right: 20px; width: 70px; filter: drop-shadow(0 0 5px #00e676);" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a4 4 0 1 1 8 0c0 4-4 7-4 10"/><path d="M10 18v3"/><path d="M16 6a3 3 0 1 1 6 0c0 3-3 5-3 8" stroke="#d500f9"/><path d="M19 14v3" stroke="#d500f9"/></svg>
+            
+            <svg class="deco-svg" style="bottom: 60px; right: 30px; width: 50px; filter: drop-shadow(0 0 5px #d500f9);" viewBox="0 0 24 24" fill="none" stroke="#d500f9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a4 4 0 1 1 8 0c0 4-4 7-4 10"/><path d="M10 18v3"/></svg>
+
+            <svg class="deco-svg" style="top: 50%; right: 10%; width: 40px; filter: drop-shadow(0 0 5px #d500f9);" viewBox="0 0 24 24" fill="none" stroke="#d500f9" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <svg class="deco-svg" style="top: 55%; right: 20%; width: 30px; filter: drop-shadow(0 0 5px #00e676);" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+
+
+            <div class="neon-layout">
+                <div class="neon-outline-purple">¡Feliz</div>
+
+                <div class="snoopy-circle-container">
+                    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" alt="Snoopy">
+                </div>
+
+                <div class="neon-cursive-green">Cumpleaños</div>
+
+                <div class="neon-outline-purple">Mafe!</div>
+            </div>
+            
+            <p class="subtitle"><span>✨</span> 20 primaveras, 20 momentos contigo <span>✨</span></p>
             <div class="header-date">18/12/2025</div>
         </header>
 
@@ -211,15 +417,14 @@
             <div class="hanging-items-wrapper">
                 <div class="photo-card">
                     <div class="clip"></div>
-                    <img src="G1.png" alt="G1">
+                    <img src="F1.jpeg" alt="G1">
                     <p>Después de nuestro partido en contra (me ganaste)</p>
                 </div>
                 <div class="note-card">
                     <div class="clip"></div>
-                    <p>"One piece me enseñó que puedo escoger a mi familia y por eso eres mi hermanita"</p>
+                    <p>"One piece me enseñó que puedo escoger a mi familia, así que te escogí como mi hermanita"</p>
                     <strong>- Lisiado</strong>
-                    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="mini-sticker" style="width: 80px; right: -55px;">
-                </div>
+                    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="mini-sticker" style="width: 100px; right: -65px;">                </div>
             </div>
         </div>
 
@@ -229,14 +434,14 @@
             <div class="hanging-items-wrapper">
                 <div class="photo-card">
                     <div class="clip"></div>
-                    <img src="Astrid.jpeg" alt="Astrid">
+                    <img src="Astrid_r.jpeg" alt="Astrid">
                     <p>Uno de nuestros tantos días en la prepa</p>
                 </div>
                 <div class="note-card">
                     <div class="clip"></div>
                     <p>"Te quiero mucho corazón de melon"</p>
                     <strong>- Astrid</strong>
-                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHl5ZmZ5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5Z3J5/3o6ZtpW1uAB1QjM6k0/giphy.gif" class="mini-sticker" style="width: 50px;">
+                    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHA1ZnB6ajlvdHZxazgwM2ZhMWE3M21qenNpbTM2cGJvZXY2NWdyeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/NxgjDYxluo0sRjHw80/giphy.gif" class="mini-sticker" style="width: 100px; right: -65px;">
                 </div>
             </div>
         </div>
@@ -254,11 +459,12 @@
                     <div class="clip"></div>
                     <p>"No importa lo que pase, siempre, siempre habrá limones para todo"</p>
                     <strong>- Zam</strong>
-                    <img src="https://media0.giphy.com/media/yuD5M8ZFkI53O/giphy.gif" class="mini-sticker">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjMyaGJjM3JzMG54ZjB1ODY4YjM0ZWJlZnVkYnVuMzA5eW12djBqNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/ErSGTG65qORKo/giphy.gif" class="mini-sticker" style="width: 90px; right: -68px;">
                 </div>
             </div>
         </div>
 
+        
          <div class="fairy-string-container">
             <div class="fairy-string"></div>
             <div class="light l1 green"></div><div class="light l2 purple"></div><div class="light l3 green"></div><div class="light l4 purple"></div>
@@ -272,8 +478,29 @@
                     <div class="clip"></div>
                     <p>"Tqm Mafe"</p>
                     <strong>- Glenda</strong>
-                    <img src="https://media.giphy.com/media/t1j3KW8BXTzccCLdNb/giphy.gif" class="mini-sticker" style="width: 70px; right: -25px;">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjk3bGhtYWo2OHQ4dnNpN29kZGczb2FwYXh5azB1dWl4Z3dscHkydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/jUUAsl6GksJDOwv1bg/giphy.gif" class="mini-sticker" style="width: 80px; right: -55px;">
                 </div>
+            </div>
+        </div>
+
+        <div class="fairy-string-container">
+            <div class="fairy-string"></div>
+            <div class="light l1 purple"></div><div class="light l2 green"></div><div class="light l3 purple"></div><div class="light l4 green"></div>
+            <div class="hanging-items-wrapper">
+            <div class="photo-card">
+                <div class="clip"></div>
+                <video controls style="width: 100%; border-radius: 2px;">
+                    <source src="hermanosoficiales.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+                <p>La primera vez que te dije hermanita</p>
+            </div>
+
+            <div class="note-card">
+                <div class="clip"></div>
+                <p>"Esa semana nos estuvieron preguntando si éramos hermanos y empezamos a decir que sí"</p>
+                <strong>- Lisiado</strong>
+                <img src="hermanos oficiales.mp4" class="mini-sticker">
             </div>
         </div>
 
@@ -282,7 +509,8 @@
         </footer>
     </div>
 
-    <script>
+  <script>
+        // 1. LÓGICA DE LA CAJA DE REGALO Y MÚSICA INICIAL
         document.getElementById('gift-trigger').addEventListener('click', function() {
             const gift = document.getElementById('gift-trigger');
             const snoopy = document.getElementById('flying-snoopy');
@@ -291,6 +519,7 @@
             const audio = document.getElementById('musica');
             const txt = overlay.querySelector('p');
 
+            // Volumen inicial de la música
             audio.volume = 0.5;
             audio.play().catch(e => console.log(e));
 
@@ -304,6 +533,39 @@
                 main.style.opacity = '1';
                 setTimeout(() => { overlay.style.display = 'none'; snoopy.style.display = 'none'; }, 1000);
             }, 4500); 
+        });
+
+        // 2. LÓGICA INTELIGENTE DE VIDEOS (NUEVO)
+        // Buscamos todos los videos de la página
+        const videos = document.querySelectorAll('video');
+        const bgMusic = document.getElementById('musica');
+
+        videos.forEach(video => {
+            // CUANDO UN VIDEO EMPIEZA (PLAY)
+            video.addEventListener('play', () => {
+                // A) Pausar otros videos que estén sonando
+                videos.forEach(v => {
+                    if (v !== video) {
+                        v.pause();
+                    }
+                });
+
+                // B) Bajar la música de fondo (Efecto "Ducking")
+                // La bajamos a 0.1 (muy bajito) para que se oiga el video
+                bgMusic.volume = 0.1; 
+            });
+
+            // CUANDO UN VIDEO SE PAUSA
+            video.addEventListener('pause', () => {
+                // Regresamos la música al volumen normal (0.5)
+                bgMusic.volume = 0.5;
+            });
+
+            // CUANDO UN VIDEO TERMINA
+            video.addEventListener('ended', () => {
+                // Regresamos la música al volumen normal
+                bgMusic.volume = 0.5;
+            });
         });
     </script>
 </body>
