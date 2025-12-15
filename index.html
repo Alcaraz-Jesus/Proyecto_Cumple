@@ -294,112 +294,140 @@
             /* Un poquito más de espacio al final de la página */
             padding-bottom: 40px; /* Antes era 20px */
         }
-        /* --- MÓVIL --- */
-       /* --- MÓVIL (ACTUALIZADO) --- */
-        @media (max-width: 768px) {
-            /* ... Tus reglas anteriores del header en móvil ... */
-            header { padding: 30px 10px 50px 10px; }
-            .neon-outline-purple { font-size: 3em; }
-            .neon-cursive-green { font-size: 3.2em; }
-            .snoopy-circle-container { width: 130px; height: 130px; }
+/* =========================================
+   1. ESTILOS BASE (PC Y GENERAL)
+   (Estos definen el tamaño y posición original)
+   ========================================= */
 
-            /* NUEVOS AJUSTES PARA LAS FOTOS EN MÓVIL */
-            .header-wrapper-completo {
-                margin: 60px auto 80px auto;
-                max-width: 95%; /* Usar casi todo el ancho */
-            }
-            .pointing-girl {
-                height: 280px; /* Mucho más pequeñas en celular */
-                bottom: -20px;
-                z-index: 1; /* En móvil, ponerlas DETRÁS del texto para que se lea */
-                opacity: 0.9;
-            }
-            .girl-left { left: -40px; }
-            .girl-right { right: -40px; }
-        }
+/* Envoltorio para el Header y las Fotos */
+.header-wrapper-completo {
+    position: relative;
+    max-width: 900px;
+    margin: 100px auto 120px auto;
+}
 
-        /* --- NUEVO: Envoltorio para el Header y las Fotos --- */
-        .header-wrapper-completo {
-            position: relative;
-            max-width: 900px; /* Ancho máximo total */
-            margin: 100px auto 120px auto; /* Margen superior e inferior para dar espacio a las fotos */
-            /* border: 1px solid red; /* Descomenta esto si necesitas ver los límites */
-        }
+/* Ajuste al header para permitir que las fotos se salgan del marco */
+header {
+    margin: 0 auto;
+    overflow: visible; 
+}
 
-        /* Ajuste necesario al header existente */
-        header {
-            margin: 0 auto; /* Quitamos el margen que tenía antes para que el envoltorio lo controle */
-            /* Asegúrate que el header NO tenga 'overflow: hidden' si lo agregaste antes */
-        }
+/* Estilos de las chicas señalando */
+.pointing-girl {
+    position: absolute;
+    bottom: -40px;
+    height: 550px; /* Tamaño original grande */
+    width: auto;
+    z-index: 20;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+    pointer-events: none;
+}
 
-        /* --- Estilos para las chicas señalando --- */
-        .pointing-girl {
-            position: absolute;
-            bottom: -40px; /* Ajusta esto para subir/bajar las imágenes respecto al borde inferior del neón */
-            height: 550px; /* ¡Aquí controlas qué tan GRANDES se ven! */
-            width: auto;
-            z-index: 20; /* Para que queden por encima del marco de neón */
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6)); /* Sombra para que resalten del fondo */
-            pointer-events: none; /* Para que no interfieran con clicks */
-        }
+/* Foto Izquierda */
+.girl-left {
+    left: -160px;
+    transform: rotate(2deg);
+}
 
-        /* Foto Izquierda (Blusa blanca, señalando derecha) */
-        .girl-left {
-            left: -160px; /* Qué tanto se sale hacia la izquierda */
-            transform: rotate(2deg); /* Un ligero ángulo para dinamismo */
-        }
+/* Foto Derecha (con tus ajustes personalizados) */
+.girl-right {
+    height: 350px;
+    right: -90px;
+    bottom: -70px;
+    transform: rotate(-3deg);
+}
 
-        /* Foto Derecha (Blusa negra, señalando izquierda) */
-        /* Foto Derecha (Blusa negra, señalando izquierda) - AJUSTADA */
-        .girl-right {
-            /* La hacemos más pequeña (sobrescribe la altura general de 550px) */
-            height: 350px; 
-            
-            /* Ajustamos la posición para que quede bien con el nuevo tamaño */
-            right: -90px; 
-            bottom: -70px;
-            
-            /* La rotamos más para que apunte mejor al centro */
-            transform: rotate(-3deg);
-        }
-    /* ===== FIX REAL PARA HEADER EN MÓVIL (SIN ROMPER PC) ===== */
+
+/* =======================================================
+   SOLUCIÓN RESPONSIVE "TODO TERRENO" (Tablets y Móviles)
+   ======================================================= */
+
+/* 1. AJUSTE GENERAL PARA CUALQUIER PANTALLA MENOR A 768PX */
+/* =======================================================
+   ESTRATEGIA DE 3 NIVELES (PARA QUE SIEMPRE SE VEA GRANDE)
+   ======================================================= */
+
+/* NIVEL 1: TABLETS Y CELULARES HORIZONTALES (601px - 768px) 
+   Aquí hacemos que se vea CASI tan grande como en PC.
+*/
 @media (max-width: 768px) {
-
-    /* 1. El envoltorio necesita altura para "contener" a las chicas */
-    .header-wrapper-completo {
-        min-height: 520px; /* espacio suficiente para título + snoopy */
-        margin-top: 40px;
-        margin-bottom: 80px;
-    }
-
-    /* 2. Las chicas deben reducirse MUCHO en móvil */
-    .pointing-girl {
-        height: 220px !important; /* clave */
-        bottom: -10px;
-        opacity: 0.9;
-        z-index: 1; /* detrás del texto */
-    }
-
-    .girl-left {
-        left: -30px;
-    }
-
-    .girl-right {
-        right: -30px;
-        height: 200px !important; /* aún más pequeña */
-        bottom: -15px;
-    }
-
-    /* 3. El texto debe quedar SIEMPRE encima */
-    .neon-layout,
-    .subtitle,
-    .header-date {
+    header {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0;
         position: relative;
-        z-index: 5;
+        overflow: hidden; 
+        display: block;
+        
+        /* Altura grande porque el zoom será grande */
+        height: 480px; 
+    }
+
+    .header-wrapper-completo {
+        width: 650px; 
+        max-width: none;
+        position: absolute;
+        left: 50%;
+        top: 20px; /* Un poco de aire arriba */
+        
+        /* ZOOM GRANDE (0.75): Se verá potente en iPad Mini o Tablets */
+        transform: translateX(-50%) scale(0.75); 
+        transform-origin: top center;
+        margin: 0;
+    }
+
+    /* Reglas fijas para las chicas (No cambian) */
+    .pointing-girl {
+        height: 550px !important;
+        bottom: -40px !important; 
+        z-index: 20;
+        opacity: 1;
+        pointer-events: none;
+    }
+    .girl-left { left: -140px !important; }
+    .girl-right { 
+        height: 350px !important;
+        right: -60px !important; 
+        bottom: -70px !important; 
+    }
+    .neon-layout { margin-top: 0; }
+}
+
+/* NIVEL 2: CELULARES GRANDES / DISPOSITIVOS MEDIANOS (451px - 600px)
+   (iPhone Pro Max, Samsung Ultra, etc.)
+*/
+@media (max-width: 600px) {
+    header {
+        height: 380px; /* Ajustamos altura */
+    }
+
+    .header-wrapper-completo {
+        /* ZOOM MEDIANO (0.58): Llenará bien la pantalla sin salirse */
+        transform: translateX(-50%) scale(0.58); 
+        top: 30px; 
     }
 }
 
-    </style>
+/* NIVEL 3: CELULARES ESTÁNDAR Y PEQUEÑOS (Hasta 450px)
+   (iPhone normal, Androids estándar - Como la captura del iPhone 6/7/8)
+*/
+@media (max-width: 450px) {
+    header {
+        height: 320px; /* Altura compacta */
+    }
+
+    .header-wrapper-completo {
+        /* ZOOM MÁXIMO POSIBLE (0.44): */
+        /* Antes tenías 0.36, por eso se veía chico. Lo subimos a 0.44 */
+        transform: translateX(-50%) scale(0.44); 
+        
+        top: 35px; /* Bajamos un poco para salvar la cabeza de la chica de negro */
+    }
+    
+    /* Ajuste de seguridad para la chica de la izquierda en pantallas muy angostas */
+    .girl-left { left: -130px !important; }
+}
+  </style>
 </head>
 <body>
 
